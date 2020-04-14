@@ -25,19 +25,12 @@ class DelegatesMap<TItem> {
      * @param delegate The registered delegate
      * @param TChildItem A type that must inherit [TItem]
      * @param TViewHolder The type of the ViewHolder
-     * @exception DelegateAlreadyRegisteredException Thrown if there's already a delegate registered for this ViewType
      * @return The same instance of this [DelegatesMap], for chaining calls
      */
     fun <TChildItem : TItem, TViewHolder : RecyclerView.ViewHolder> registerDelegate(
         viewType: Int,
         delegate: ViewHolderDelegate<TChildItem, TViewHolder>
     ) = apply {
-        // Check if there's another delegate already registered for this ViewType, which would be dangerous and not allowed
-        val oldDelegateInPlace = delegates[viewType]
-        if (oldDelegateInPlace != null) {
-            throw DelegateAlreadyRegisteredException(viewType, oldDelegateInPlace::class)
-        }
-
         @Suppress("UNCHECKED_CAST")
         delegates[viewType] = delegate as ViewHolderDelegate<TItem, RecyclerView.ViewHolder>
     }

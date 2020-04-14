@@ -13,14 +13,6 @@ class DelegatesMapTest {
         Assert.assertNotNull(delegatesMap[1])
     }
 
-    @Test(expected = DelegateAlreadyRegisteredException::class)
-    fun `When I try to register the same delegate for the view type, registering as a super type, it shouldn't work`() {
-        val delegatesMap = DelegatesMap<Supertype>()
-
-        delegatesMap.registerDelegate(1, SupertypeViewHolderDelegate())
-        delegatesMap.registerDelegate(1, SupertypeViewHolderDelegate())
-    }
-
     @Test
     fun `When I try to register the delegate for the view type, it should work`() {
         val delegatesMap = DelegatesMap<Supertype>()
@@ -28,14 +20,6 @@ class DelegatesMapTest {
         delegatesMap.registerDelegate(1, Children1ViewHolderDelegate())
 
         Assert.assertNotNull(delegatesMap[1])
-    }
-
-    @Test(expected = DelegateAlreadyRegisteredException::class)
-    fun `When I try to register the same delegate for the view type, it shouldn't work`() {
-        val delegatesMap = DelegatesMap<Supertype>()
-
-        delegatesMap.registerDelegate(1, Children1ViewHolderDelegate())
-        delegatesMap.registerDelegate(1, Children1ViewHolderDelegate())
     }
 
     @Test

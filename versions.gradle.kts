@@ -22,4 +22,5 @@ with(extra) {
     set("junitExtVersion", "1.1.1")
     set("espressoVersion", "3.2.0")
     set("robolectricVersion", "4.3.1")
+    set("mockkVersion", "1.9.3")
 }
