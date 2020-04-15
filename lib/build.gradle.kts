@@ -42,6 +42,8 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
+    testOptions.unitTests.isIncludeAndroidResources = true
 }
 
 dependencies {
@@ -50,6 +52,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:${properties["recyclerViewVersion"]}")
     testImplementation("junit:junit:${properties["junit4Version"]}")
     testImplementation("org.robolectric:robolectric:${properties["robolectricVersion"]}")
+    testImplementation("androidx.test:core-ktx:${properties["coreKtxTestingVersion"]}")
     testImplementation("io.mockk:mockk:${properties["mockkVersion"]}")
     androidTestImplementation("androidx.test.ext:junit:${properties["junitExtVersion"]}")
     androidTestImplementation("androidx.test.espresso:espresso-core:${properties["espressoVersion"]}")

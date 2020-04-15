@@ -29,9 +29,7 @@ object SupertypeViewTypeRetriever : ViewTypeRetriever<Supertype> {
 
 class SupertypeViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent)
 class SupertypeViewHolderDelegate : ViewHolderDelegate<Supertype, SupertypeViewHolder> {
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return SupertypeViewHolder(parent)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup) = SupertypeViewHolder(parent)
 
     override fun onBindViewHolder(holder: SupertypeViewHolder, item: Supertype) {}
 }

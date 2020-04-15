@@ -20,11 +20,10 @@ object Child1EnumOwner : ParentTestEnumOwner {
 
 class Child1EnumOwnerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent)
 
-class Child1EnumOwnerDelegate : ViewHolderDelegate<Child1EnumOwner, Children1ViewHolder> {
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
-        Child1EnumOwnerViewHolder(parent)
+class Child1EnumOwnerDelegate : ViewHolderDelegate<Child1EnumOwner, Child1EnumOwnerViewHolder> {
+    override fun onCreateViewHolder(parent: ViewGroup) = Child1EnumOwnerViewHolder(parent)
 
-    override fun onBindViewHolder(holder: Children1ViewHolder, item: Child1EnumOwner) {}
+    override fun onBindViewHolder(holder: Child1EnumOwnerViewHolder, item: Child1EnumOwner) {}
 }
 
 object Child2EnumOwner : ParentTestEnumOwner {
@@ -66,7 +65,7 @@ class EnumViewTypeRetrieverTest {
         class ConcreteTypeViewHolderForValue2(parent: ViewGroup) : RecyclerView.ViewHolder(parent)
         class ConcreteTypeDelegateForValue1 :
             ViewHolderDelegate<ConcreteType, ConcreteTypeViewHolderForValue1> {
-            override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
+            override fun onCreateViewHolder(parent: ViewGroup) =
                 ConcreteTypeViewHolderForValue1(parent)
 
             override fun onBindViewHolder(
@@ -78,7 +77,7 @@ class EnumViewTypeRetrieverTest {
 
         class ConcreteTypeDelegateForValue2 :
             ViewHolderDelegate<ConcreteType, ConcreteTypeViewHolderForValue2> {
-            override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
+            override fun onCreateViewHolder(parent: ViewGroup) =
                 ConcreteTypeViewHolderForValue2(parent)
 
             override fun onBindViewHolder(

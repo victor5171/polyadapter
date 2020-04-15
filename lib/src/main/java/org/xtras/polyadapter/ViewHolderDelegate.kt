@@ -14,7 +14,7 @@ interface ViewHolderDelegate<in TValue, TViewHolder : RecyclerView.ViewHolder> {
      * @param parent Use this ViewGroup to instantiate your ViewHolder
      * @return The ViewHolder that will draw every [TValue]
      */
-    fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder
+    fun onCreateViewHolder(parent: ViewGroup): TViewHolder
 
     /**
      * Binds the data inside [item] into the ViewHolder

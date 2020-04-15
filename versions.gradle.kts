@@ -10,7 +10,7 @@ with(extra) {
     set("ktlintVersion", "9.2.1")
 
     // Libs
-    set("kotlinVersion", "1.3.71")
+    set("kotlinVersion", "1.3.72")
     set("appCompatVersion", "1.1.0")
     set("coreKtxVersion", "1.2.0")
     set("constraintLayoutVersion", "1.1.3")
@@ -23,4 +23,5 @@ with(extra) {
     set("espressoVersion", "3.2.0")
     set("robolectricVersion", "4.3.1")
     set("mockkVersion", "1.9.3")
+    set("coreKtxTestingVersion", "1.2.0")
 }
