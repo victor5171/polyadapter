@@ -16,6 +16,8 @@ with(extra) {
     set("constraintLayoutVersion", "1.1.3")
     set("recyclerViewVersion", "1.1.0")
     set("pagingVersion", "2.1.2")
+    set("materialComponentsVersion", "1.1.0-rc02")
+    set("navigationVersion", "2.2.2")
 
     // Testing
     set("junit4Version", "4.13")

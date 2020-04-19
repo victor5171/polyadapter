@@ -11,6 +11,7 @@ sealed class SealedFirstLevel
 object SecondLevelChild : SealedFirstLevel()
 
 sealed class SealedSecondLevelChild : SealedFirstLevel()
+abstract class AbstractSecondLevelChild : SealedFirstLevel()
 object ThirdLevelChild1 : SealedSecondLevelChild()
 object ThirdLevelChild2 : SealedSecondLevelChild()
 
@@ -36,7 +37,7 @@ class ClassViewTypeRetrieverTest {
     }
 
     @Test
-    fun `When I try to get all the children, it should give me all the children downwards, excluding sealed classes`() {
+    fun `When I try to get all the children, it should give me all the children downwards, excluding sealed and abstract classes`() {
         val childrenFromFirstLevel = childrenRecursively(SealedFirstLevel::class).toList()
         Assert.assertEquals(3, childrenFromFirstLevel.size)
         Assert.assertTrue(childrenFromFirstLevel.toTypedArray().contentDeepEquals(arrayOf(

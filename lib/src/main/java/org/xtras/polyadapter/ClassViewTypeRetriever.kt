@@ -48,7 +48,7 @@ inline fun <TItem, reified TChildItem, TViewHolder> PolyAdapterBuilder<TItem, Cl
 }
 
 /**
- * Gets all the children recursively from [T], not including sealed classes
+ * Gets all the children recursively from [T], not including sealed and abstract classes
  * @return A sequence containing all the children
  */
 fun <T : Any> childrenRecursively(clazz: KClass<T>): Sequence<KClass<out T>> = sequence {
@@ -57,7 +57,7 @@ fun <T : Any> childrenRecursively(clazz: KClass<T>): Sequence<KClass<out T>> = s
     children.forEach {
         yieldAll(childrenRecursively(it))
 
-        if (!it.isSealed) {
+        if (!it.isSealed && !it.isAbstract) {
             yield(it)
         }
     }

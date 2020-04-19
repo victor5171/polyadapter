@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/recyclerViewFragment">
+    <fragment
+        android:id="@+id/recyclerViewFragment"
+        android:name="org.xtras.polyadapter.app.RecyclerViewFragment"
+        android:label="fragment_recycler_view"
+        tools:layout="@layout/fragment_recycler_view" />
+    <fragment
+        android:id="@+id/customAdapterFragment"
+        android:name="org.xtras.polyadapter.app.CustomAdapterFragment"
+        android:label="fragment_custom_adapter"
+        tools:layout="@layout/fragment_custom_adapter" />
+    <fragment
+        android:id="@+id/listAdapterFragment"
+        android:name="org.xtras.polyadapter.app.ListAdapterFragment"
+        android:label="fragment_list_adapter"
+        tools:layout="@layout/fragment_list_adapter" />
+</navigation>

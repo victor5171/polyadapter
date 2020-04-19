@@ -1,6 +1,7 @@
 package org.xtras.polyadapter
 
 import android.view.ViewGroup
+import androidx.annotation.VisibleForTesting
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
 
@@ -14,7 +15,7 @@ import java.lang.ref.WeakReference
  * @param TItem the supertype of the items of this adapter
  */
 class PolyAdapter<TItem : Any> internal constructor(
-    private val viewTypeRetriever: ViewTypeRetriever<TItem>,
+    @VisibleForTesting internal val viewTypeRetriever: ViewTypeRetriever<TItem>,
     private val delegates: DelegatesMap<TItem>,
     private val itemGetter: ItemGetter<TItem>
 ) {
