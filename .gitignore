@@ -125,6 +125,7 @@ obj/
 .idea/dynamic.xml
 .idea/uiDesigner.xml
 .idea/assetWizardSettings.xml
+.idea/navEditor.xml
 
 # OS-specific files
 .DS_Store
