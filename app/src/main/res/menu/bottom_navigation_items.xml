@@ -6,6 +6,9 @@
     <item android:id="@+id/listAdapterFragment"
         android:title="@string/action_list_adapter"
         android:icon="@drawable/ic_list_adapter"/>
+    <item android:id="@+id/mergeAdapterFragment"
+        android:title="@string/action_merge_adapter"
+        android:icon="@drawable/ic_merge_adapter"/>
     <item android:id="@+id/customAdapterFragment"
         android:title="@string/action_custom_adapter"
         android:icon="@drawable/ic_custom_adapter"/>

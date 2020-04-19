@@ -41,7 +41,7 @@ dependencies {
     implementation("com.google.android.material:material:${properties["materialComponentsVersion"]}")
     implementation("androidx.navigation:navigation-fragment-ktx:${properties["navigationVersion"]}")
     implementation("androidx.navigation:navigation-ui-ktx:${properties["navigationVersion"]}")
-    implementation("androidx.recyclerview:recyclerview:${properties["recyclerViewVersion"]}")
+    implementation("androidx.recyclerview:recyclerview:1.2.0-alpha02") //Overriding the version to use MergeAdapter
     testImplementation("junit:junit:${properties["junit4Version"]}")
     testImplementation("org.robolectric:robolectric:${properties["robolectricVersion"]}")
     testImplementation("androidx.test:core-ktx:${properties["coreKtxTestingVersion"]}")

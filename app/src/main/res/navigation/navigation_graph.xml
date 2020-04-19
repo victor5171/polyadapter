@@ -19,4 +19,9 @@
         android:name="org.xtras.polyadapter.app.ListAdapterFragment"
         android:label="fragment_list_adapter"
         tools:layout="@layout/fragment_list_adapter" />
+    <fragment
+        android:id="@+id/mergeAdapterFragment"
+        android:name="org.xtras.polyadapter.app.MergeAdapterFragment"
+        android:label="fragment_merge_adapter"
+        tools:layout="@layout/fragment_merge_adapter" />
 </navigation>

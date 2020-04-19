@@ -26,6 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/bottom_navigation_items"
+        app:labelVisibilityMode="labeled"
         app:itemBackground="@color/colorTabBar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,5 +2,8 @@
     <string name="app_name">Poly Adapter</string>
     <string name="action_recycler_view">RecyclerView</string>
     <string name="action_list_adapter">ListAdapter</string>
+    <string name="action_merge_adapter">MergeAdapter</string>
     <string name="action_custom_adapter">CustomAdapter</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
