@@ -1,7 +1,6 @@
 package org.xtras.polyadapter
 
 import android.content.Context
-import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import io.mockk.mockkClass
 import org.junit.Assert
