@@ -31,7 +31,7 @@ jobs:
           key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "lib/build.gradle.kts" }}
       - run:
           name: Publish to Bintray
-          command: ./gradlew test build bintrayUpload -PdryRun=false
+          command: ./gradlew test build bintrayUpload -PdryRun=false --stacktrace
 
 workflows:
   version: 2
