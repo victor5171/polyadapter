@@ -1,6 +1,7 @@
 package org.xtras.polyadapter
 
 import android.content.Context
+import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import io.mockk.mockkClass
 import org.junit.Assert
@@ -13,7 +14,7 @@ import org.xtras.polyadapter.testhelpers.PolyAdapterTester
 import org.xtras.polyadapter.testhelpers.SealedClassItemGenerator
 import org.xtras.polyadapter.testhelpers.create
 
-@Config(manifest = Config.NONE)
+@Config(manifest = Config.NONE, sdk = [Build.VERSION_CODES.P])
 @RunWith(RobolectricTestRunner::class)
 class BodyAdapterBuilderTest {
     @Test

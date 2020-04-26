@@ -1,7 +1,6 @@
 package org.xtras.polyadapter.app.viewholders
 
 import android.view.ViewGroup
-import java.lang.String
 import kotlinx.android.synthetic.main.list_item_background_category.view.*
 import org.xtras.polyadapter.BindableViewHolder
 import org.xtras.polyadapter.app.R
