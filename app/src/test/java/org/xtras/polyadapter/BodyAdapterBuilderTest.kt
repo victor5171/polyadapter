@@ -14,7 +14,7 @@ import org.xtras.polyadapter.testhelpers.PolyAdapterTester
 import org.xtras.polyadapter.testhelpers.SealedClassItemGenerator
 import org.xtras.polyadapter.testhelpers.create
 
-@Config(manifest = Config.NONE, sdk = [Build.VERSION_CODES.P])
+@Config(manifest = Config.NONE)
 @RunWith(RobolectricTestRunner::class)
 class BodyAdapterBuilderTest {
     @Test
