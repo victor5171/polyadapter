@@ -50,10 +50,9 @@ dependencies {
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
     implementation("org.jetbrains.kotlin:kotlin-reflect:${KotlinCompilerVersion.VERSION}")
     implementation("androidx.recyclerview:recyclerview:${properties["recyclerViewVersion"]}")
+    implementation("androidx.paging:paging-runtime-ktx:${properties["paginationVersion"]}")
     testImplementation("junit:junit:${properties["junit4Version"]}")
     testImplementation("org.robolectric:robolectric:${properties["robolectricVersion"]}")
     testImplementation("androidx.test:core-ktx:${properties["coreKtxTestingVersion"]}")
     testImplementation("io.mockk:mockk:${properties["mockkVersion"]}")
-    androidTestImplementation("androidx.test.ext:junit:${properties["junitExtVersion"]}")
-    androidTestImplementation("androidx.test.espresso:espresso-core:${properties["espressoVersion"]}")
 }

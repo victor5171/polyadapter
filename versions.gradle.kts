@@ -18,6 +18,7 @@ with(extra) {
     set("pagingVersion", "2.1.2")
     set("materialComponentsVersion", "1.1.0-rc02")
     set("navigationVersion", "2.2.2")
+    set("paginationVersion", "2.1.2")
 
     // Testing
     set("junit4Version", "4.13")

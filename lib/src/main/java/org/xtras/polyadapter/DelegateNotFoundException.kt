@@ -12,7 +12,7 @@ class DelegateNotFoundException private constructor(override val message: String
          */
         fun buildWithGenericMessage(
             viewType: Int,
-            delegates: DelegatesMap<*>
+            delegates: Map<*, *>
         ) =
             DelegateNotFoundException("Delegate not found for $viewType! All delegates: $delegates")
 
@@ -20,9 +20,9 @@ class DelegateNotFoundException private constructor(override val message: String
          * Builds a detailed message showing the item that was going to be drawn, making the fix easier
          */
         fun buildWithDetailedMessage(
-            value: Any,
+            value: Any?,
             viewType: Int,
-            delegates: DelegatesMap<*>
+            delegates: Map<*, *>
         ) =
             DelegateNotFoundException(("Delegate not found for the value: $value, it's viewType was $viewType, all delegates: $delegates"))
     }

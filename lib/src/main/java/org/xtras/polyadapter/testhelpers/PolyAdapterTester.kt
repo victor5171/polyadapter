@@ -5,7 +5,7 @@ import android.widget.FrameLayout
 import androidx.annotation.VisibleForTesting
 import org.xtras.polyadapter.PolyAdapter
 import org.xtras.polyadapter.PolyAdapterBuilder
-import org.xtras.polyadapter.ViewTypeRetriever
+import org.xtras.polyadapter.viewtyperetrievers.ViewTypeRetriever
 
 /**
  * Useful class to write Unit tests for your adapter and to check if all delegates were registered
@@ -16,7 +16,7 @@ import org.xtras.polyadapter.ViewTypeRetriever
  * @see [EnumItemGenerator] and [SealedClassItemGenerator]
  */
 @VisibleForTesting
-class PolyAdapterTester<TItem : Any, TViewTypeRetriever : ViewTypeRetriever<TItem>>(
+class PolyAdapterTester<TItem, TViewTypeRetriever : ViewTypeRetriever<TItem>>(
     polyAdapterBuilder: PolyAdapterBuilder<TItem, TViewTypeRetriever>,
     allItemsGenerator: AllItemsGenerator<TItem>
 ) {

@@ -24,4 +24,9 @@
         android:name="org.xtras.polyadapter.app.MergeAdapterFragment"
         android:label="fragment_merge_adapter"
         tools:layout="@layout/fragment_merge_adapter" />
+    <fragment
+        android:id="@+id/pagedAdapterFragment"
+        android:name="org.xtras.polyadapter.app.PagedAdapterFragment"
+        android:label="fragment_paged_adapter"
+        tools:layout="@layout/fragment_merge_adapter" />
 </navigation>

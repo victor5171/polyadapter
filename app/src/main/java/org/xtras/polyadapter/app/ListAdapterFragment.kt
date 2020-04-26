@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import kotlin.random.Random
 import kotlinx.android.synthetic.main.fragment_list_adapter.*
 import org.xtras.polyadapter.app.adapterbuilders.BodyAdapterBuilder
 import org.xtras.polyadapter.app.items.BackgroundCategory
@@ -13,7 +14,6 @@ import org.xtras.polyadapter.app.items.BodyItem
 import org.xtras.polyadapter.app.items.IconCategory
 import org.xtras.polyadapter.app.items.LoadingItem
 import org.xtras.polyadapter.app.items.TextCategory
-import kotlin.random.Random
 
 class ListAdapterFragment : Fragment() {
 

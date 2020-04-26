@@ -2,10 +2,10 @@ package org.xtras.polyadapter.app
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.MergeAdapter
 import kotlinx.android.synthetic.main.fragment_merge_adapter.*
 import org.xtras.polyadapter.app.adapterbuilders.BodyAdapterBuilder
@@ -18,7 +18,8 @@ import org.xtras.polyadapter.app.items.TextCategory
 class MergeAdapterFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_merge_adapter, container, false)

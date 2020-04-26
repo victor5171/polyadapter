@@ -12,7 +12,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.xtras.polyadapter.PolyAdapterBuilder
 import org.xtras.polyadapter.ViewHolderDelegate
-import org.xtras.polyadapter.ViewTypeRetriever
+import org.xtras.polyadapter.viewtyperetrievers.ViewTypeRetriever
 
 @Config(manifest = Config.NONE)
 @RunWith(RobolectricTestRunner::class)
@@ -22,7 +22,8 @@ class PolyAdapterTesterTest {
     private object Children1 : Supertype
     private object Children2 : Supertype
 
-    private val viewTypeRetriever = object : ViewTypeRetriever<Supertype> {
+    private val viewTypeRetriever = object :
+        ViewTypeRetriever<Supertype> {
         override fun getViewType(value: Supertype): Int {
             return when (value) {
                 is Children1 -> 1

@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
+import org.xtras.polyadapter.viewtyperetrievers.ViewTypeRetriever
 
 /**
  * Adapter that encapsulates the work to get different ViewHolders for different items that inherit a similar structure
@@ -14,9 +15,9 @@ import java.lang.ref.WeakReference
  * @param itemGetter A function that provides items for every position, you can use getItem for ListAdapters for example
  * @param TItem the supertype of the items of this adapter
  */
-class PolyAdapter<TItem : Any> internal constructor(
+class PolyAdapter<TItem> internal constructor(
     @VisibleForTesting internal val viewTypeRetriever: ViewTypeRetriever<TItem>,
-    private val delegates: DelegatesMap<TItem>,
+    private val delegates: Map<Int, ViewHolderDelegate<TItem, RecyclerView.ViewHolder>>,
     private val itemGetter: ItemGetter<TItem>
 ) {
     /**

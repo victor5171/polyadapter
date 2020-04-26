@@ -2,7 +2,7 @@ package org.xtras.polyadapter.testhelpers
 
 import androidx.annotation.VisibleForTesting
 import kotlin.reflect.KClass
-import org.xtras.polyadapter.childrenRecursively
+import org.xtras.polyadapter.viewtyperetrievers.childrenRecursively
 
 /**
  * An implementation of [AllItemsGenerator], meant to be used if [TItem] is a sealed class

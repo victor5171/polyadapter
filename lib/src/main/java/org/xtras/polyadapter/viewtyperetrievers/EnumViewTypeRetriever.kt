@@ -1,6 +1,8 @@
-package org.xtras.polyadapter
+package org.xtras.polyadapter.viewtyperetrievers
 
 import androidx.recyclerview.widget.RecyclerView
+import org.xtras.polyadapter.PolyAdapterBuilder
+import org.xtras.polyadapter.ViewHolderDelegate
 
 /**
  * Represents a function that gets a Enum inside an item
@@ -37,7 +39,6 @@ fun <TItem, TChildItem, TViewHolder, TEnum> PolyAdapterBuilder<TItem, EnumViewTy
     enum: TEnum,
     delegate: ViewHolderDelegate<TChildItem, TViewHolder>
 ) where
-    TItem : Any,
     TChildItem : TItem,
     TViewHolder : RecyclerView.ViewHolder,
     TEnum : Enum<TEnum> = apply {

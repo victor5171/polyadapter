@@ -11,18 +11,20 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.xtras.polyadapter.delegatesmap.MutableDelegatesMapBuilder
 
 @Config(manifest = Config.NONE)
 @RunWith(RobolectricTestRunner::class)
 class PolyAdapterTests {
 
-    private val delegates = DelegatesMap<Supertype>()
+    private val delegates = MutableDelegatesMapBuilder<Supertype>()
         .registerDelegate(1, Children1ViewHolderDelegate())
         .registerDelegate(2, Children2ViewHolderDelegate())
 
     @Test
     fun `When I try to get the ViewType for each item, it should work`() {
-        val polyAdapter = PolyAdapter(SupertypeViewTypeRetriever, delegates, SupertypeItemGetter)
+        val polyAdapter =
+            PolyAdapter(SupertypeViewTypeRetriever, delegates.buildMap(), SupertypeItemGetter)
 
         Assert.assertEquals(1, polyAdapter.getItemViewType(0))
         Assert.assertEquals(2, polyAdapter.getItemViewType(1))
@@ -34,7 +36,8 @@ class PolyAdapterTests {
             UnregisteredChildren3
         }
 
-        val polyAdapter = PolyAdapter(SupertypeViewTypeRetriever, delegates, failureItemGetter)
+        val polyAdapter =
+            PolyAdapter(SupertypeViewTypeRetriever, delegates.buildMap(), failureItemGetter)
 
         polyAdapter.getItemViewType(0)
     }
@@ -49,7 +52,7 @@ class PolyAdapterTests {
             }
         }
 
-        val polyAdapter = PolyAdapter(SupertypeViewTypeRetriever, delegates, itemGetter)
+        val polyAdapter = PolyAdapter(SupertypeViewTypeRetriever, delegates.buildMap(), itemGetter)
 
         val context = ApplicationProvider.getApplicationContext<Context>()
 
@@ -73,11 +76,11 @@ class PolyAdapterTests {
 
         val spyChildren2ViewHolderDelegate = spyk<Children2ViewHolderDelegate>()
 
-        val delegates = DelegatesMap<Supertype>()
+        val delegates = MutableDelegatesMapBuilder<Supertype>()
             .registerDelegate(1, spyChildren1ViewHolderDelegate)
             .registerDelegate(2, spyChildren2ViewHolderDelegate)
 
-        val polyAdapter = PolyAdapter(SupertypeViewTypeRetriever, delegates, itemGetter)
+        val polyAdapter = PolyAdapter(SupertypeViewTypeRetriever, delegates.buildMap(), itemGetter)
 
         val context = ApplicationProvider.getApplicationContext<Context>()
 
@@ -87,13 +90,23 @@ class PolyAdapterTests {
 
         polyAdapter.onBindViewHolder(children1ViewHolder, 0)
 
-        verify(exactly = 1) { spyChildren1ViewHolderDelegate.onBindViewHolder(children1ViewHolder, Children1) }
+        verify(exactly = 1) {
+            spyChildren1ViewHolderDelegate.onBindViewHolder(
+                children1ViewHolder,
+                Children1
+            )
+        }
 
         val children2ViewHolder = Children2ViewHolder(parent)
 
         polyAdapter.onBindViewHolder(children2ViewHolder, 1)
 
-        verify(exactly = 1) { spyChildren2ViewHolderDelegate.onBindViewHolder(children2ViewHolder, Children2) }
+        verify(exactly = 1) {
+            spyChildren2ViewHolderDelegate.onBindViewHolder(
+                children2ViewHolder,
+                Children2
+            )
+        }
 
         confirmVerified(spyChildren1ViewHolderDelegate, spyChildren2ViewHolderDelegate)
     }

@@ -2,6 +2,7 @@ package org.xtras.polyadapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import org.xtras.polyadapter.viewtyperetrievers.ViewTypeRetriever
 
 sealed class Supertype
 object Children1 : Supertype()
@@ -18,7 +19,8 @@ object SupertypeItemGetter : ItemGetter<Supertype> {
     }
 }
 
-object SupertypeViewTypeRetriever : ViewTypeRetriever<Supertype> {
+object SupertypeViewTypeRetriever :
+    ViewTypeRetriever<Supertype> {
     override fun getViewType(value: Supertype): Int {
         if (value is Children1) return 1
         if (value is Children2) return 2

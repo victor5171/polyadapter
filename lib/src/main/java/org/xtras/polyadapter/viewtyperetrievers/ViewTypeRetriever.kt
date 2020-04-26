@@ -1,7 +1,7 @@
-package org.xtras.polyadapter
+package org.xtras.polyadapter.viewtyperetrievers
 
 /**
- * Retriever the ViewType of [TItem] to be used inside the [PolyAdapter]
+ * Retrieves the ViewType of [TItem] to be used inside the [PolyAdapter]
  * You have to provide an [Int] value so the RecyclerView Adapter can differentiate between items
  */
 interface ViewTypeRetriever<in TItem> {

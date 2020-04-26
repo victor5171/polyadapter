@@ -1,7 +1,9 @@
-package org.xtras.polyadapter
+package org.xtras.polyadapter.viewtyperetrievers
 
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.reflect.KClass
+import org.xtras.polyadapter.PolyAdapterBuilder
+import org.xtras.polyadapter.ViewHolderDelegate
 
 /**
  * Retrieves the ViewType using the hash code of the class
@@ -9,7 +11,8 @@ import kotlin.reflect.KClass
  * Useful for sealed-classes
  * @param TItem The supertype you want to support polymorphism by class
  */
-class ClassViewTypeRetriever<TItem : Any> : ViewTypeRetriever<TItem> {
+class ClassViewTypeRetriever<TItem : Any> :
+    ViewTypeRetriever<TItem> {
 
     /**
      * Returns the hash code using the hash code of the class of [value]
@@ -37,7 +40,9 @@ inline fun <TItem, reified TChildItem, TViewHolder> PolyAdapterBuilder<TItem, Cl
     val childItemClass = TChildItem::class
 
     if (childItemClass.isSealed) {
-        childrenRecursively(childItemClass).forEach {
+        childrenRecursively(
+            childItemClass
+        ).forEach {
             registerDelegate(it.hashCode(), delegate)
         }
 

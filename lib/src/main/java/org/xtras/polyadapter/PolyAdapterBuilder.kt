@@ -1,10 +1,20 @@
 package org.xtras.polyadapter
 
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import org.xtras.polyadapter.delegatesmap.MutableDelegatesMapBuilder
+import org.xtras.polyadapter.paging.EmptyPlaceholderViewHolderDelegate
+import org.xtras.polyadapter.paging.NullItem
+import org.xtras.polyadapter.paging.NullSafeDelegatesMapBuilder
+import org.xtras.polyadapter.paging.NullSafeViewTypeRetriever
+import org.xtras.polyadapter.paging.RealItem
+import org.xtras.polyadapter.viewtyperetrievers.ViewTypeRetriever
+
+private const val PAGING_PLACEHOLDER_VIEW_TYPE = -1
 
 /**
  * Builder to generate instances of the [PolyAdapter] or some adapter types
@@ -12,12 +22,12 @@ import androidx.recyclerview.widget.RecyclerView
  * @param TItem the supertype of all items inside the adapter
  * @param TViewTypeRetriever the type of the [ViewTypeRetriever] this PolyAdapter shall use
  * @param viewTypeRetriever Used to generate ViewTypes inside the [PolyAdapter]
- * @see [ClassViewTypeRetriever] and [EnumViewTypeRetriever]
  */
-class PolyAdapterBuilder<TItem : Any, in TViewTypeRetriever : ViewTypeRetriever<TItem>>(
+class PolyAdapterBuilder<TItem, in TViewTypeRetriever : ViewTypeRetriever<TItem>>(
     private val viewTypeRetriever: TViewTypeRetriever
 ) {
-    private val delegatesMap = DelegatesMap<TItem>()
+    private val delegatesMap =
+        MutableDelegatesMapBuilder<TItem>()
 
     /**
      * Registers a delegate, attaching it to [viewType]
@@ -100,10 +110,90 @@ class PolyAdapterBuilder<TItem : Any, in TViewTypeRetriever : ViewTypeRetriever<
     }
 
     /**
+     * Builds a [PagedListAdapter], already hooking an instance of [PolyAdapter] with it
+     * @param diffCallback A [DiffUtil.ItemCallback] used for the [PagedListAdapter]
+     * @param placeholderViewHolderDelegate A [ViewHolderDelegate] used for the placeholders,
+     * if you don't want to use placeholders, don't send anything,
+     * for more info check here [https://developer.android.com/topic/libraries/architecture/paging/ui#provide-placeholders]
+     * @return An instance of [PagedListAdapter], ready to be used with polymorphic types
+     */
+    fun buildForPagedListAdapter(
+        diffCallback: DiffUtil.ItemCallback<TItem>,
+        placeholderViewHolderDelegate: ViewHolderDelegate<NullItem<TItem>, *> = EmptyPlaceholderViewHolderDelegate()
+    ): PagedListAdapter<TItem, RecyclerView.ViewHolder> {
+        return object : PagedListAdapter<TItem, RecyclerView.ViewHolder>(diffCallback) {
+
+            private val multiAdapter = PolyAdapter(
+                NullSafeViewTypeRetriever(
+                    viewTypeRetriever,
+                    PAGING_PLACEHOLDER_VIEW_TYPE
+                ),
+                NullSafeDelegatesMapBuilder(
+                    PAGING_PLACEHOLDER_VIEW_TYPE,
+                    placeholderViewHolderDelegate,
+                    delegatesMap
+                ).buildMap()
+            ) { position ->
+                getItem(position)?.let { RealItem(it) } ?: NullItem()
+            }
+
+            override fun onCreateViewHolder(
+                parent: ViewGroup,
+                viewType: Int
+            ) = multiAdapter.onCreateViewHolder(parent, viewType)
+
+            override fun getItemViewType(position: Int) = multiAdapter.getItemViewType(position)
+
+            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
+                multiAdapter.onBindViewHolder(holder, position)
+        }
+    }
+
+    /**
+     * Builds a [PagedListAdapter], already hooking an instance of [PolyAdapter] with it
+     * @param asyncDifferConfig A config used for the [ListAdapter]
+     * @param placeholderViewHolderDelegate A [ViewHolderDelegate] used for the placeholders,
+     * if you don't want to use placeholders, don't send anything,
+     * for more info check here [https://developer.android.com/topic/libraries/architecture/paging/ui#provide-placeholders]
+     * @return An instance of [PagedListAdapter], ready to be used with polymorphic types
+     */
+    fun buildForPagedListAdapter(
+        asyncDifferConfig: AsyncDifferConfig<TItem>,
+        placeholderViewHolderDelegate: ViewHolderDelegate<NullItem<TItem>, *> = EmptyPlaceholderViewHolderDelegate()
+    ): PagedListAdapter<TItem, RecyclerView.ViewHolder> {
+        return object : PagedListAdapter<TItem, RecyclerView.ViewHolder>(asyncDifferConfig) {
+
+            private val multiAdapter = PolyAdapter(
+                NullSafeViewTypeRetriever(
+                    viewTypeRetriever,
+                    PAGING_PLACEHOLDER_VIEW_TYPE
+                ),
+                NullSafeDelegatesMapBuilder(
+                    PAGING_PLACEHOLDER_VIEW_TYPE,
+                    placeholderViewHolderDelegate,
+                    delegatesMap
+                ).buildMap()
+            ) { position ->
+                getItem(position)?.let { RealItem(it) } ?: NullItem()
+            }
+
+            override fun onCreateViewHolder(
+                parent: ViewGroup,
+                viewType: Int
+            ) = multiAdapter.onCreateViewHolder(parent, viewType)
+
+            override fun getItemViewType(position: Int) = multiAdapter.getItemViewType(position)
+
+            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
+                multiAdapter.onBindViewHolder(holder, position)
+        }
+    }
+
+    /**
      * Builds an instance of [PolyAdapter], if you want to use it inside your own adapter for more flexibility
      * @param itemGetter A lambda that retrieves items for a given position
      * @return The instance of [PolyAdapter]
      */
     fun buildOnlyAdapter(itemGetter: ItemGetter<TItem>) =
-        PolyAdapter(viewTypeRetriever, delegatesMap, itemGetter)
+        PolyAdapter(viewTypeRetriever, delegatesMap.buildMap(), itemGetter)
 }

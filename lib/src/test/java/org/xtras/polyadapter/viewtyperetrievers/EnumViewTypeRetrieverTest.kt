@@ -1,9 +1,11 @@
-package org.xtras.polyadapter
+package org.xtras.polyadapter.viewtyperetrievers
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.junit.Assert
 import org.junit.Test
+import org.xtras.polyadapter.PolyAdapterBuilder
+import org.xtras.polyadapter.ViewHolderDelegate
 
 enum class TestEnum {
     Value1,
@@ -14,20 +16,26 @@ interface ParentTestEnumOwner {
     val testEnum: TestEnum
 }
 
-object Child1EnumOwner : ParentTestEnumOwner {
-    override val testEnum = TestEnum.Value1
+object Child1EnumOwner :
+    ParentTestEnumOwner {
+    override val testEnum =
+        TestEnum.Value1
 }
 
 class Child1EnumOwnerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent)
 
-class Child1EnumOwnerDelegate : ViewHolderDelegate<Child1EnumOwner, Child1EnumOwnerViewHolder> {
-    override fun onCreateViewHolder(parent: ViewGroup) = Child1EnumOwnerViewHolder(parent)
+class Child1EnumOwnerDelegate :
+    ViewHolderDelegate<Child1EnumOwner, Child1EnumOwnerViewHolder> {
+    override fun onCreateViewHolder(parent: ViewGroup) =
+        Child1EnumOwnerViewHolder(parent)
 
     override fun onBindViewHolder(holder: Child1EnumOwnerViewHolder, item: Child1EnumOwner) {}
 }
 
-object Child2EnumOwner : ParentTestEnumOwner {
-    override val testEnum = TestEnum.Value2
+object Child2EnumOwner :
+    ParentTestEnumOwner {
+    override val testEnum =
+        TestEnum.Value2
 }
 
 class EnumViewTypeRetrieverTest {
@@ -50,8 +58,13 @@ class EnumViewTypeRetrieverTest {
         val enumViewTypeRetriever =
             EnumViewTypeRetriever<ParentTestEnumOwner, TestEnum> { testEnum }
 
-        val polyAdapter = PolyAdapterBuilder(enumViewTypeRetriever)
-            .registerDelegate(TestEnum.Value1, Child1EnumOwnerDelegate())
+        val polyAdapter = PolyAdapterBuilder(
+            enumViewTypeRetriever
+        )
+            .registerDelegate(
+                TestEnum.Value1,
+                Child1EnumOwnerDelegate()
+            )
             .buildOnlyAdapter { Child1EnumOwner }
 
         Assert.assertEquals(TestEnum.Value1.ordinal, polyAdapter.getItemViewType(0))
@@ -87,9 +100,12 @@ class EnumViewTypeRetrieverTest {
             }
         }
 
-        val enumTypeRetriever = EnumViewTypeRetriever<ConcreteType, TestEnum> { enum }
+        val enumTypeRetriever =
+            EnumViewTypeRetriever<ConcreteType, TestEnum> { enum }
 
-        val polyAdapter = PolyAdapterBuilder(enumTypeRetriever)
+        val polyAdapter = PolyAdapterBuilder(
+            enumTypeRetriever
+        )
             .registerDelegate(TestEnum.Value1, ConcreteTypeDelegateForValue1())
             .registerDelegate(TestEnum.Value2, ConcreteTypeDelegateForValue2())
             .buildOnlyAdapter {

@@ -10,7 +10,7 @@ import androidx.annotation.VisibleForTesting
  * @param itemGenerator A function that shall return an instance of [TItem] which has a enum with an specific value inside it
  */
 @VisibleForTesting
-class EnumItemGenerator<TItem : Any, TEnum : Enum<TEnum>>(
+class EnumItemGenerator<TItem, TEnum : Enum<TEnum>>(
     private val enumValues: Array<TEnum>,
     private val itemGenerator: (enumValue: TEnum) -> TItem
 ) : AllItemsGenerator<TItem> {
@@ -28,7 +28,7 @@ class EnumItemGenerator<TItem : Any, TEnum : Enum<TEnum>>(
  * @param itemGenerator A function that shall return an instance of [TItem] which has a enum with an specific value inside it
  * @return An instance of [EnumItemGenerator]
  */
-inline fun <TItem : Any, reified TEnum : Enum<TEnum>> EnumItemGenerator.Companion.create(
+inline fun <TItem, reified TEnum : Enum<TEnum>> EnumItemGenerator.Companion.create(
     noinline itemGenerator: (enumValue: TEnum) -> TItem
 ): EnumItemGenerator<TItem, TEnum> {
     val enumValues = enumValues<TEnum>()
