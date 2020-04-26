@@ -13,7 +13,7 @@ val currentTag = System.getenv("CIRCLE_TAG") ?: "0.0.1"
 configure<PublishExtension> {
     userOrg = "victor5171"
     groupId = "org.xtras.polyadapter"
-    repoName = "polyadapter"
+    repoName = "xtras"
     artifactId = "polyadapter"
     publishVersion = currentTag
     bintrayUser = "victor5171"
