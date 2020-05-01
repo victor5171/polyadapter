@@ -19,9 +19,7 @@ If you just want to try the library before reading the documentation, you can do
 repositories {
     jcenter()
     //Or
-    maven {
-		url  "https://dl.bintray.com/victor5171/xtras"
-	}
+    maven { url  "https://dl.bintray.com/victor5171/xtras" }
 }
 ```
 And include the library:
